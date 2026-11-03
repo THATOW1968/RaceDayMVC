@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RaceDayMVC.Models;
+using System.Diagnostics;
 
 namespace RaceDayMVC.Controllers
 {
@@ -30,3 +30,4 @@ namespace RaceDayMVC.Controllers
         }
     }
 }
+

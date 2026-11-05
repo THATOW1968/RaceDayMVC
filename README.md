@@ -36,11 +36,5 @@ This project is the Part 3 submission for the RaceDay platform. It consists of t
 ### 6. Database (SQLite)
 To ensure the project runs perfectly on any computer without requiring SQL Server setup, the database was switched to **SQLite**. The `RaceDay.db` file is created automatically the first time the API runs.
 
-## How to Run Locally
-1. Open `RaceDayAPI.sln` in Visual Studio.
-2. Right-click the Solution -> **Configure Startup Projects** -> Select **Multiple startup projects**.
-3. Set both `RaceDayAPI` and `RaceDayMVC` to **Start**. Click OK.
-4. Press **the green sign arrow**.
-   * The API will launch Swagger on `https://localhost:5001`.
-   * The MVC app will launch on `https://localhost:5002`.
+
 

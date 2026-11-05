@@ -3,9 +3,9 @@ using RaceDayMVC.Models;
 using System.Diagnostics;
 
 namespace RaceDayMVC.Controllers
-{
+{//start of namespace
     public class HomeController : Controller
-    {
+    {//start of class
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -28,6 +28,6 @@ namespace RaceDayMVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
-}
+    }//end of class
+}//end of namespace
 

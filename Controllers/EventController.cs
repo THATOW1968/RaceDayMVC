@@ -3,9 +3,9 @@ using RaceDayMVC.Models;
 using RaceDayMVC.Services;
 
 namespace RaceDayMVC.Controllers
-{
+{//start of namespace
     public class EventController : Controller
-    {
+    {//start of class
         private readonly ApiService _api;
 
         public EventController(ApiService api) { _api = api; }
@@ -64,5 +64,5 @@ namespace RaceDayMVC.Controllers
             var enrolments = await _api.GetEventEnrollmentsAsync(eventId);
             return View(enrolments);
         }
-    }
-}
+    }//end of class
+}//end of namespace

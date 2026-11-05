@@ -1,0 +1,35 @@
+﻿@model RaceDayMVC.Models.Event
+@{
+    Layout = "_Layout";
+}
+<div class="container mt-4">
+    <h2 class="text-danger fw-bold">Create New Event</h2>
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form method="post" class="card p-4 shadow">
+        <div class="mb-3">
+            <label class="fw-bold">Event Name</label>
+            <input type="text" name="EventName" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Description</label>
+            <textarea name="Description" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Date</label>
+            <input type="date" name="EventDate" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Location</label>
+            <input type="text" name="Location" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="fw-bold">Distance</label>
+            <input type="text" name="Distance" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-danger">Create Event</button>
+    </form>
+</div>

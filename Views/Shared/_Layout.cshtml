@@ -6,13 +6,42 @@
     <title>@ViewData["Title"] - RaceDay</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
-        .navbar { background-color: #111 !important; border-bottom: 4px solid #dc3545; }
-        .navbar-brand { color: #dc3545 !important; font-weight: 900; font-size: 1.5rem; }
-        .nav-link { color: white !important; font-weight: 600; }
-        .nav-link:hover { color: #dc3545 !important; }
-        .card { border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .btn-danger { background-color: #dc3545; border: none; font-weight: bold; }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background-color: #111 !important;
+            border-bottom: 4px solid #dc3545;
+        }
+
+        .navbar-brand {
+            color: #dc3545 !important;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+
+            .nav-link:hover {
+                color: #dc3545 !important;
+            }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -22,6 +51,16 @@
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">🏃‍♂️ RACEDAY</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <!-- NEW ROLE-BASED LINKS ADDED HERE -->
+                        @if (Context.Session.GetString("UserRole") == "Organizer")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Event" asp-action="Index">My Events</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Event" asp-action="Create">Create Event</a></li>
+                        }
+                        else if (Context.Session.GetString("UserRole") == "Participant")
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-controller="Event" asp-action="Index">Browse Events</a></li>
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @if (Context.Session.GetString("UserRole") != null)

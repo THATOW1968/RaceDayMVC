@@ -58,5 +58,40 @@ namespace RaceDayMVC.Services
             }
             return new List<Event>();
         }
+
+        // --- CREATE EVENT (Organizer) ---
+        public async Task<bool> CreateEventAsync(Event newEvent)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/Event");
+            request.Headers.Add("Role", "Organizer");
+            request.Content = new StringContent(JsonSerializer.Serialize(newEvent), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            return response.IsSuccessStatusCode;
+        }
+
+        // --- ENROLL IN EVENT (Participant) ---
+        public async Task<bool> EnrollAsync(int eventId, int userId)
+        {
+            var enrolData = new { EventID = eventId, ParticipantID = userId, Category = "Open" };
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/Enrollment");
+            request.Headers.Add("Role", "Participant");
+            request.Content = new StringContent(JsonSerializer.Serialize(enrolData), Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.SendAsync(request);
+            return response.IsSuccessStatusCode;
+        }
+
+        // --- GET ENROLMENTS FOR EVENT (Organizer) ---
+        public async Task<List<Enrollment>> GetEventEnrollmentsAsync(int eventId)
+        {
+            var response = await _httpClient.GetAsync($"api/Enrollment/event/{eventId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<List<Enrollment>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<Enrollment>();
+            }
+            return new List<Enrollment>();
+        }
     }
 }

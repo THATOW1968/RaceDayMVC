@@ -1,0 +1,41 @@
+﻿@model List<RaceDayMVC.Models.Event>
+@{
+    Layout = "_Layout";
+}
+<div class="container mt-4">
+    <h2 class="text-danger fw-bold">Upcoming Events</h2>
+
+    @if (Context.Session.GetString("UserRole") == "Organizer")
+    {
+        <a href="/Event/Create" class="btn btn-danger mb-3">+ Create New Event</a>
+    }
+
+    <div class="row">
+        @foreach (var ev in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <img src="@ev.ImageUrl" class="card-img-top" style="height:180px; object-fit:cover;">
+                    <div class="card-body">
+                        <h5 class="fw-bold">@ev.EventName</h5>
+                        <p class="text-muted small">📍 @ev.Location <br> 📅 @ev.EventDate.ToString("dd MMM yyyy")</p>
+                        <p>@ev.Description</p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        @if (Context.Session.GetString("UserRole") == "Participant")
+                        {
+                            <form method="post" asp-action="Enroll">
+                                <input type="hidden" name="eventId" value="@ev.EventID" />
+                                <button type="submit" class="btn btn-danger w-100 fw-bold">Enrol Now</button>
+                            </form>
+                        }
+                        else if (Context.Session.GetString("UserRole") == "Organizer")
+                        {
+                            <a href="/Event/ViewEnrolments?eventId=@ev.EventID" class="btn btn-outline-dark w-100 fw-bold">View Enrolments</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

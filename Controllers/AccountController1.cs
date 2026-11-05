@@ -3,9 +3,9 @@ using RaceDayMVC.Models;
 using RaceDayMVC.Services;
 
 namespace RaceDayMVC.Controllers
-{
+{//start of namespace
     public class AccountController : Controller
-    {
+    {//start of class
         private readonly ApiService _api;
 
         public AccountController(ApiService api) { _api = api; }
@@ -47,5 +47,6 @@ namespace RaceDayMVC.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
-    }
-}
+    }//end of class
+}//end of namespace
+

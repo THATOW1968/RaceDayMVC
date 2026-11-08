@@ -3,9 +3,9 @@ using System.Text.Json;
 using RaceDayMVC.Models;
 
 namespace RaceDayMVC.Services
-{
+{//start of namespace
     public class ApiService
-    {
+    {//start of class
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -93,5 +93,5 @@ namespace RaceDayMVC.Services
             }
             return new List<Enrollment>();
         }
-    }
-}
+    }//end of class
+}//end of namespace

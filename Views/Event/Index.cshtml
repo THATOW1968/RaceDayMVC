@@ -15,7 +15,19 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow h-100">
-                    <img src="@ev.ImageUrl" class="card-img-top" style="height:180px; object-fit:cover;">
+
+                    <!-- FIXED IMAGE PATH LOGIC -->
+                    @if (!string.IsNullOrEmpty(ev.ImageUrl) && ev.ImageUrl.Contains("/images/"))
+                    {
+                        <!-- Show the uploaded local image -->
+                        <img src="@Url.Content("~" + ev.ImageUrl)" class="card-img-top" style="height:180px; object-fit:cover;" alt="Event Banner">
+                    }
+                    else
+                    {
+                        <!-- Fallback to the Unsplash image -->
+                        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=1000&auto=format&fit=crop" class="card-img-top" style="height:180px; object-fit:cover;" alt="Default Event Banner">
+                    }
+
                     <div class="card-body">
                         <h5 class="fw-bold">@ev.EventName</h5>
                         <p class="text-muted small"> @ev.Location <br> @ev.EventDate.ToString("dd MMM yyyy")</p>

@@ -15,7 +15,7 @@ namespace RaceDayMVC.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        // --- LOGIN ---
+        //LOGIN 
         public async Task<bool> LoginAsync(string email, string password)
         {
             var loginData = new { Email = email, PasswordHash = password };
@@ -39,7 +39,7 @@ namespace RaceDayMVC.Services
             return false;
         }
 
-        // --- REGISTER ---
+        //REGISTER 
         public async Task<bool> RegisterAsync(User newUser)
         {
             var content = new StringContent(JsonSerializer.Serialize(newUser), Encoding.UTF8, "application/json");
@@ -47,7 +47,7 @@ namespace RaceDayMVC.Services
             return response.IsSuccessStatusCode;
         }
 
-        // --- GET EVENTS ---
+        //GET EVENTS 
         public async Task<List<Event>> GetEventsAsync()
         {
             var response = await _httpClient.GetAsync("api/Event");
@@ -59,7 +59,7 @@ namespace RaceDayMVC.Services
             return new List<Event>();
         }
 
-        // --- CREATE EVENT (Organizer) ---
+        //CREATE EVENT (Organizer) 
         public async Task<bool> CreateEventAsync(Event newEvent)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "api/Event");
@@ -70,7 +70,7 @@ namespace RaceDayMVC.Services
             return response.IsSuccessStatusCode;
         }
 
-        // --- ENROLL IN EVENT (Participant) ---
+        //ENROLL IN EVENT (Participant) 
         public async Task<bool> EnrollAsync(int eventId, int userId)
         {
             var enrolData = new { EventID = eventId, ParticipantID = userId, Category = "Open" };
@@ -82,7 +82,7 @@ namespace RaceDayMVC.Services
             return response.IsSuccessStatusCode;
         }
 
-        // --- GET ENROLMENTS FOR EVENT (Organizer) ---
+        //GET ENROLMENTS FOR EVENT (Organizer) 
         public async Task<List<Enrollment>> GetEventEnrollmentsAsync(int eventId)
         {
             var response = await _httpClient.GetAsync($"api/Enrollment/event/{eventId}");
